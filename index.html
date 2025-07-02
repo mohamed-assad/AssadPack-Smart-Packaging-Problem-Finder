@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="AssadPack Smart Packaging Problem Finder – solve flexible packaging issues based on expert insights.">
+  <title>AssadPack – Smart Packaging Problem Finder</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f7fb; color: #333; padding: 20px; }
+    .container { max-width: 800px; margin: auto; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; }
+    h1 { color: #003366; font-size: 24px; }
+    select, button { padding: 10px; width: 100%; margin-top: 10px; }
+    .result { margin-top: 20px; background: #e8f4ff; padding: 15px; border-radius: 8px; }
+    .footer { margin-top: 30px; font-size: 14px; color: #555; text-align: center; }
+    .footer a { color: #0056b3; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 AssadPack – Smart Packaging Problem Finder</h1>
+    <p>Who are you?</p>
+    <select id="userType">
+      <option value="">-- Select your role --</option>
+      <option value="buyer">I buy flexible packaging</option>
+      <option value="supplier">I produce/supply flexible packaging</option>
+    </select>
+
+    <p>What's the packaging issue you're facing?</p>
+    <select id="issueType">
+      <option value="">-- Select a problem --</option>
+      <option value="seal">Seal Integrity Problem</option>
+      <option value="puncture">Tear or Puncture</option>
+      <option value="print">Print & Color Issues</option>
+      <option value="barrier">Barrier Property Failure</option>
+      <option value="curl">Film Curling/Wrinkling</option>
+    </select>
+
+    <button onclick="showRecommendation()">Get Expert Recommendation</button>
+
+    <div id="result" class="result" style="display:none;"></div>
+
+    <div class="footer">
+      Developed by <strong>Mohamed Assad</strong> – <a href="https://www.linkedin.com/in/mohamed-assad-%D9%85%D8%AD%D9%85%D8%AF-%D8%A3%D8%B3%D8%B9%D8%AF-308159a4/" target="_blank">LinkedIn</a><br/>
+      Bridging packaging and performance.
+    </div>
+  </div>
+
+  <script>
+    const recommendations = {
+      buyer: {
+        seal: "Ensure machine compatibility, clean sealing zones, and request Seal Strength CoA from your supplier.",
+        puncture: "Use OPA or thick PE layers. Avoid under-micron films. Test with drop and puncture simulation.",
+        print: "Use Pantone-coded vector files. Always request press proof on actual material. Clarify color tolerances.",
+        barrier: "Use AL or high-barrier metPET/EVOH. Ask for OTR/WVTR test results from supplier. Avoid pinholes.",
+        curl: "Ask supplier for good layflat films. Check machine settings and match film shrink rates."
+      },
+      supplier: {
+        seal: "Check customer machine specs. Use optimal sealant films. Calibrate sealing zone regularly.",
+        puncture: "Use HDPE or LLDPE/OPA layers. Avoid thin gauges. Train operators on handling sharp products.",
+        print: "Provide customers with design guidelines. Invest in color matching systems. Check registration.",
+        barrier: "Use trusted raw films with verified specs. Avoid AL pinholes. Offer lab-tested barrier values.",
+        curl: "Control lamination tension. Match shrink ratio of layers. Test samples on client machines before run."
+      }
+    };
+
+    function showRecommendation() {
+      const type = document.getElementById("userType").value;
+      const issue = document.getElementById("issueType").value;
+      const resultDiv = document.getElementById("result");
+
+      if (!type || !issue) {
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = "❗ Please select your role and the issue.";
+        return;
+      }
+
+      const advice = recommendations[type][issue];
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = `<strong>🧠 Expert Tip:</strong><br>${advice}`;
+    }
+  </script>
+</body>
+</html>
